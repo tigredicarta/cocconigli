@@ -20,7 +20,9 @@ const resolveTypeHint = (value: string | null): 'movie' | 'tv' | null => {
 const pickFirst = (...values: Array<string | null>) => {
   for (const value of values) {
     const trimmed = value?.trim();
-    if (trimmed) return trimmed;
+    if (!trimmed) continue;
+    if (/^\{[^}]+\}$/.test(trimmed)) continue;
+    return trimmed;
   }
   return null;
 };
